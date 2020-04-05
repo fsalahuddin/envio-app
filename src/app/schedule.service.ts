@@ -10,6 +10,8 @@ export class ScheduleService {
   public zoneServerUrl = 'https://my-json-server.typicode.com/ivanturianytsia-envio/json-data/zones';
   public allZones;
   public setTempUnit;
+
+  // dummy schedules, when a new schedule is created it gets added to this list
   public schedules = [
         { id: 1, date: new Date('2020-04-04'), temperature: 25, zoneID: 5 },
         { id: 2, date: new Date('2020-04-06'), temperature: 27, zoneID: 8},

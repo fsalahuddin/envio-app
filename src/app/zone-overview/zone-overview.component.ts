@@ -17,6 +17,7 @@ export class ZoneOverviewComponent implements OnInit {
 
   ngOnInit() {
         this.getAllZones();
+        // sort schedules chronologically by date (latest first)
         this.schedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
         this.sortedFilteredSchedules = this.schedules;
         if (!this.scheduleService.setTempUnit) {
@@ -24,6 +25,7 @@ export class ZoneOverviewComponent implements OnInit {
         }
   }
 
+  // retrieve all zones from the url given
   public getAllZones() {
         this.scheduleService.getAllZones()
         .subscribe(res => {
@@ -32,6 +34,7 @@ export class ZoneOverviewComponent implements OnInit {
         });
   }
 
+  // select or unselect zones for filter
   public selectUnselectZones(id) {
         if (this.selectedZones.includes(id)) {
             this.selectedZones = this.selectedZones.filter(element => element !== id);
@@ -39,10 +42,12 @@ export class ZoneOverviewComponent implements OnInit {
         this.filterSchedule();
   }
 
+  // filter schedules in the overview page based on the selected zones
   public filterSchedule() {
         this.sortedFilteredSchedules = this.schedules.filter(schedule => this.selectedZones.includes(schedule.zoneID));
   }
 
+  // retrieve zone name, given the id (for display purposes)
   public getZoneName(id) {
         const retrievedZone = this.allZones.filter(zone => zone.id === id)[0];
         if (retrievedZone) {
