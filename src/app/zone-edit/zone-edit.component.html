@@ -1,7 +1,7 @@
 <div class="component-container h-100 overflow-scroll">
   <div>
         <div class="relative flex flex-row">
-              <h1 class="moon-gray pa3 pt4 mt0 w-90">
+              <h1 class="moon-gray pa3 pt4 mt0 w-90 f2-l f4">
                 Edit Schedule
               </h1>
               <button mat-mini-fab class = "pointer grow ba b--white add b"
@@ -9,11 +9,11 @@
                     <i [ngClass]="createEditOn? 'fa fa-minus f4':'fa fa-plus f4'"></i>
               </button>
         </div>
-        <mat-card *ngIf="createEditOn" class="w-90 mh3">
-            <h3 *ngIf="createOn">Create A New Schedule</h3>
-            <h3 *ngIf="editOn">Edit Schedule</h3>
-            <form class="pa3" #NewScheduleForm="ngForm" (ngSubmit)="onSubmit(NewScheduleForm.value)">
-              <div class=" relative flex flex-row">
+        <mat-card *ngIf="createEditOn" class="w-90-l w-80 mh3">
+            <h3 *ngIf="createOn" class="f4-l f6">Create A New Schedule</h3>
+            <h3 *ngIf="editOn" class="f4-l f6">Edit Schedule</h3>
+            <form class="pa3 f5-l f6" #NewScheduleForm="ngForm" (ngSubmit)="onSubmit(NewScheduleForm.value)">
+              <div class=" relative flex flex-row-l flex-column">
                   <div class="w-20">
                         <mat-form-field appearance="outline" *ngIf="createOn">
                           <mat-label>Schedule ID</mat-label>
@@ -50,7 +50,7 @@
             </form>
         </mat-card>
         <div *ngFor="let schedule of sortedSchedules">
-            <mat-card class="w-20 fl ma3 bg-white-10 moon-gray">
+            <mat-card class="w-20-l w-80 fl ma3 bg-white-10 moon-gray">
                 <p><b class="mr2">Schedule ID</b>{{schedule.id}}</p>
                 <p><b class="mr2">Date</b>{{schedule.date | date:'short'}}</p>
                 <p *ngIf="allZones">

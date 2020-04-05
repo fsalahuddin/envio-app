@@ -1,19 +1,19 @@
 <nav id="menu-container" class="h4 w-100 center ph3 flex flex-row">
   <a id="header-logo" class="mid-gray link flex flex-row-lang" href="#" title="Home">
-      <img src="../assets/images/enviorgb.jpeg" class="h-50 mv4" alt="Site Name"> 
+      <img src="../assets/images/enviorgb.jpeg" class="h-50-l h-25 mv4-l mt4 mb2" alt="Site Name"> 
   </a>
-  <div class="absolute right-2 top-1 mv4">
-      <a [routerLink]="['/overview']" class="mh2 f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib white pointer">OVERVIEW</a>
-      <a [routerLink]="['/edit']" class="mh2 f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib white pointer">EDIT SCHEDULE</a>
+  <div class="absolute-l right-2-l top-1-l mv4-l mt4 mb2">
+      <a [routerLink]="['/overview']" class="mh2-l ml2 f6-l f7 grow no-underline br-pill ba bw1 ph3-l ph1 pv2 mb2 dib white pointer">OVERVIEW</a>
+      <a [routerLink]="['/edit']" class="mh2-l ml2 f6-l f7 grow no-underline br-pill ba bw1 ph3-l ph1 pv2 mb2 dib white pointer">EDIT SCHEDULE</a>
       <button mat-mini-fab [ngClass]="scheduleService.setTempUnit === 'F' ?
-                                    'mh2 selected pointer grow ba b--white' :
-                                    'mh2 unselected near-white pointer grow'"
+                                    'mh2-l ml2 selected pointer grow ba b--white' :
+                                    'mh2-l ml2 unselected near-white pointer grow'"
                             (click) = "scheduleService.toggleTempUnit()">
                                     °F
       </button>
       <button mat-mini-fab [ngClass]="scheduleService.setTempUnit === 'C' ?
-                                    'mh2 selected pointer grow ba b--white' :
-                                    'mh2 unselected near-white pointer grow'"
+                                    'mh2-l ml2 selected pointer grow ba b--white' :
+                                    'mh2-l ml2 unselected near-white pointer grow'"
                             (click) = "scheduleService.toggleTempUnit()">
                                     °C
       </button>
