@@ -20,9 +20,15 @@
             <div *ngFor="let schedule of sortedFilteredSchedules">
                 <mat-card class="w-20 fl ma3 bg-white-10 moon-gray">
                     <p><b class="mr2">Schedule ID</b>{{schedule.id}}</p>
-                    <p><b class="mr2">Date</b>{{schedule.date}}</p>
-                    <p *ngIf="allZones"><b class="mr2">Zone</b>{{getZoneName(schedule.zoneID)}}</p>
-                    <p><b class="mr2">Temperature</b>{{schedule.temperature}} °C</p>
+                    <p><b class="mr2">Date</b>{{schedule.date | date:'short'}}</p>
+                    <p *ngIf="allZones">
+                        <b class="mr2">Zone</b>
+                        {{getZoneName(schedule.zoneID)}}
+                    </p>
+                    <p>
+                        <b class="mr2">Temperature</b>
+                        {{schedule.temperature | temperature: scheduleService.setTempUnit}}
+                    </p>
                 </mat-card>
             </div>
         </div>

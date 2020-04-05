@@ -8,14 +8,16 @@ import { ZoneOverviewComponent } from './zone-overview/zone-overview.component';
 import { ZoneEditComponent } from './zone-edit/zone-edit.component';
 
 import { MatCardModule } from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { TemperaturePipe } from '../app/temperature.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ZoneOverviewComponent,
-    ZoneEditComponent
+    ZoneEditComponent,
+    TemperaturePipe
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ export class ScheduleService {
 
   public zoneServerUrl = 'https://my-json-server.typicode.com/ivanturianytsia-envio/json-data/zones';
   public allZones;
+  public setTempUnit;
   public schedules = [
         { id: 1, date: new Date('2020-04-04'), temperature: 25, zoneID: 5 },
         { id: 2, date: new Date('2020-04-06'), temperature: 27, zoneID: 8},
@@ -26,5 +27,13 @@ export class ScheduleService {
   public getAllZones() {
         console.log('All Zones from Service');
         return this._http.get(this.zoneServerUrl).pipe(map((response: Response) => response.json()));
+  }
+
+  public toggleTempUnit() {
+        if (this.setTempUnit === 'C') {
+            this.setTempUnit = 'F';
+        } else {
+            this.setTempUnit = 'C';
+        }
   }
 }

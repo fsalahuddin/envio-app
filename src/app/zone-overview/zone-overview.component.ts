@@ -19,6 +19,9 @@ export class ZoneOverviewComponent implements OnInit {
         this.getAllZones();
         this.schedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
         this.sortedFilteredSchedules = this.schedules;
+        if (!this.scheduleService.setTempUnit) {
+            this.scheduleService.setTempUnit = 'C';
+        }
   }
 
   public getAllZones() {

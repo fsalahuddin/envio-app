@@ -5,8 +5,18 @@
   <div class="absolute right-2 top-1 mv4">
       <a [routerLink]="['/overview']" class="mh2 f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib white pointer">OVERVIEW</a>
       <a [routerLink]="['/edit']" class="mh2 f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib white pointer">EDIT SCHEDULE</a>
-      <button mat-mini-fab class="mh2 unselected near-white pointer grow">°F</button>
-      <button mat-mini-fab class="mh2 selected pointer grow">°C</button>
+      <button mat-mini-fab [ngClass]="scheduleService.setTempUnit === 'F' ?
+                                    'mh2 selected pointer grow ba b--white' :
+                                    'mh2 unselected near-white pointer grow'"
+                            (click) = "scheduleService.toggleTempUnit()">
+                                    °F
+      </button>
+      <button mat-mini-fab [ngClass]="scheduleService.setTempUnit === 'C' ?
+                                    'mh2 selected pointer grow ba b--white' :
+                                    'mh2 unselected near-white pointer grow'"
+                            (click) = "scheduleService.toggleTempUnit()">
+                                    °C
+      </button>
   </div>
 </nav>
 
