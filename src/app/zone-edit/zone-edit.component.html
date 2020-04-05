@@ -6,17 +6,20 @@
               </h1>
               <button mat-mini-fab class = "pointer grow ba b--white add b"
                     (click) = "toggleCreateSchedule()">
-                    <i [ngClass]="createOn? 'fa fa-minus f4':'fa fa-plus f4'"></i>
+                    <i [ngClass]="createEditOn? 'fa fa-minus f4':'fa fa-plus f4'"></i>
               </button>
         </div>
-        <mat-card *ngIf="createOn" class="w-90 mh3">
+        <mat-card *ngIf="createEditOn" class="w-90 mh3">
+            <h3 *ngIf="createOn">Create A New Schedule</h3>
+            <h3 *ngIf="editOn">Edit Schedule</h3>
             <form class="pa3" #NewScheduleForm="ngForm" (ngSubmit)="onSubmit(NewScheduleForm.value)">
               <div class=" relative flex flex-row">
                   <div class="w-20">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" *ngIf="createOn">
                           <mat-label>Schedule ID</mat-label>
                           <input matInput name="id" required [(ngModel)]="newId">
                         </mat-form-field>
+                        <h4 *ngIf="editOn">Schedule ID &nbsp;{{newId}}</h4>
                         <br>
                         <mat-form-field appearance="outline">
                                       <mat-label>Choose a date</mat-label>
@@ -59,7 +62,7 @@
                     {{schedule.temperature | temperature: scheduleService.setTempUnit}}
                 </p>
                 <p class="mt4">
-                  <span class="f6 grow pointer no-underline br-pill ph3 pv2 mb2 dib white bg-blue">
+                  <span (click)="editSchedule(schedule.id)" class="f6 grow pointer no-underline br-pill ph3 pv2 mb2 dib white bg-blue">
                         Edit
                   </span>
                   <span (click)="deleteSchedule(schedule.id)" class="ml2 f6 grow pointer no-underline br-pill ph3 pv2 mb2 dib white bg-red">

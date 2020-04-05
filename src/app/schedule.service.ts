@@ -25,7 +25,6 @@ export class ScheduleService {
   }
 
   public getAllZones() {
-        console.log('All Zones from Service');
         return this._http.get(this.zoneServerUrl).pipe(map((response: Response) => response.json()));
   }
 

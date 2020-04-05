@@ -11,6 +11,8 @@ export class ZoneEditComponent implements OnInit {
   public schedules;
   public sortedSchedules;
   public allZones = [];
+  public createEditOn = false;
+  public editOn = false;
   public createOn = false;
   public newId;
   public newDate;
@@ -21,18 +23,16 @@ export class ZoneEditComponent implements OnInit {
 
   ngOnInit() {
         this.getAllZones();
-        console.log(this.scheduleService.setTempUnit);
         if (!this.scheduleService.setTempUnit) {
             this.scheduleService.setTempUnit = 'C';
         }
         this.schedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
         this.sortedSchedules = this.schedules;
-        console.log(this.sortedSchedules);
   }
 
   public getAllZones() {
         this.scheduleService.getAllZones()
-        .subscribe(res => this.allZones = res );
+                            .subscribe(res => this.allZones = res );
   }
 
   public getZoneName(id) {
@@ -43,23 +43,64 @@ export class ZoneEditComponent implements OnInit {
   }
 
   public toggleCreateSchedule() {
-        if (this.createOn) {
-          this.createOn = false;
-        } else {this.createOn = true; }
+        this.clearFormValues();
+        if (this.createEditOn) {
+            this.createEditOn = false;
+            this.createOn = false;
+        } else {this.createEditOn = true;
+            this.createOn = true;
+        }
   }
 
   public onSubmit(value) {
           if (this.scheduleService.setTempUnit === 'F') {
               value['temperature'] = ((value['temperature'] - 32) * 0.56).toFixed(2);
           }
-          this.scheduleService.schedules.push(value);
-          this.schedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
-          this.createOn = false;
+          if (this.createOn) {
+              this.scheduleService.schedules.push(value);
+              this.schedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
+              this.createOn = false;
+          } else if (this.editOn) {
+              value['id'] = this.newId;
+              this.scheduleService.schedules
+                  .map (schedule => {
+                                      if (schedule.id === value.id) {
+                                          schedule.zoneID = value.zoneID;
+                                          schedule.temperature = value.temperature;
+                                          schedule.date = value.date;
+                                      }
+                  });
+              this.sortedSchedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
+              this.editOn = false;
+          }
+          this.createEditOn = false;
+
   }
 
   public deleteSchedule (id) {
           this.scheduleService.schedules = this.scheduleService.schedules.filter(schedule => schedule.id !== id);
           this.sortedSchedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
+  }
+
+  public editSchedule(id) {
+          this.createEditOn = false;
+          this.createOn = false;
+          const selectedSchedule = this.scheduleService.schedules.filter(schedule => schedule.id === id);
+          this.newId = selectedSchedule[0].id;
+          this.newTemp = selectedSchedule[0].temperature;
+          this.newDate = selectedSchedule[0].date;
+          this.selectedZone = selectedSchedule[0].zoneID;
+          this.createEditOn = true;
+          this.editOn = true;
+  }
+
+  public clearFormValues() {
+          this.editOn = false;
+          this.createOn = false;
+          this.newId = null;
+          this.newDate = null;
+          this.newTemp = null;
+          this.selectedZone = null;
   }
 
 
