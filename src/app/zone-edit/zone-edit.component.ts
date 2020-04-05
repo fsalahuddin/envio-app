@@ -49,13 +49,17 @@ export class ZoneEditComponent implements OnInit {
   }
 
   public onSubmit(value) {
-          console.log(value);
           if (this.scheduleService.setTempUnit === 'F') {
               value['temperature'] = ((value['temperature'] - 32) * 0.56).toFixed(2);
           }
           this.scheduleService.schedules.push(value);
           this.schedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
           this.createOn = false;
+  }
+
+  public deleteSchedule (id) {
+          this.scheduleService.schedules = this.scheduleService.schedules.filter(schedule => schedule.id !== id);
+          this.sortedSchedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
   }
 
 
