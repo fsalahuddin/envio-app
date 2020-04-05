@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ZoneOverviewComponent } from './zone-overview/zone-overview.component';
+import { ZoneEditComponent } from './zone-edit/zone-edit.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ZoneOverviewComponent,
+    ZoneEditComponent
   ],
   imports: [
     BrowserModule,
