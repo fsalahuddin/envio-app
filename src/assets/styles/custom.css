@@ -7,6 +7,10 @@ html,body
     overflow-x: hidden; 
 }
 
-#menuContainer {
+#menu-container {
     background-color: rgb(31, 31, 45);
+}
+
+.component-container {
+    background-color: rgb(19, 18, 27);
 }

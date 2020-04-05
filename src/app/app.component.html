@@ -1,10 +1,12 @@
-<nav id="menuContainer" class="h4 w-100 center ph3 flex flex-row">
+<nav id="menu-container" class="h4 w-100 center ph3 flex flex-row">
   <a id="header-logo" class="mid-gray link flex flex-row-lang" href="#" title="Home">
       <img src="../assets/images/enviorgb.jpeg" class="h-50 mv4" alt="Site Name"> 
   </a>
   <div class="absolute right-2 top-1 mv4">
       <a [routerLink]="['/overview']" class="mh2 f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib white pointer">OVERVIEW</a>
       <a [routerLink]="['/edit']" class="mh2 f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib white pointer">EDIT SCHEDULE</a>
+      <button mat-mini-fab class="mh2">°F</button>
+      <button mat-mini-fab class="mh2">°C</button>
   </div>
 </nav>
 
