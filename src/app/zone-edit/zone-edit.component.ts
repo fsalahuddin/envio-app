@@ -11,6 +11,11 @@ export class ZoneEditComponent implements OnInit {
   public schedules;
   public sortedSchedules;
   public allZones = [];
+  public createOn = false;
+  public newId;
+  public newDate;
+  public selectedZone;
+  public newTemp;
 
   constructor(public scheduleService: ScheduleService) { }
 
@@ -37,8 +42,20 @@ export class ZoneEditComponent implements OnInit {
         } else { return ' -- '; }
   }
 
-  public createSchedule() {
-        console.log('trigger new schedule');
+  public toggleCreateSchedule() {
+        if (this.createOn) {
+          this.createOn = false;
+        } else {this.createOn = true; }
+  }
+
+  public onSubmit(value) {
+          console.log(value);
+          if (this.scheduleService.setTempUnit === 'F') {
+              value['temperature'] = ((value['temperature'] - 32) * 0.56).toFixed(2);
+          }
+          this.scheduleService.schedules.push(value);
+          this.schedules = this.scheduleService.schedules.sort((a, b) => b.date.getTime() - a.date.getTime());
+          this.createOn = false;
   }
 
 

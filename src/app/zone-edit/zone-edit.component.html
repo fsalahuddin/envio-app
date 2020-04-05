@@ -1,14 +1,51 @@
-<div class="component-container h-100">
+<div class="component-container h-100 overflow-scroll">
   <div>
         <div class="relative flex flex-row">
               <h1 class="moon-gray pa3 pt4 mt0 w-90">
                 Edit Schedule
               </h1>
               <button mat-mini-fab class = "pointer grow ba b--white add b"
-                    (click) = "createSchedule()">
-                            NEW
+                    (click) = "toggleCreateSchedule()">
+                    <i [ngClass]="createOn? 'fa fa-minus f4':'fa fa-plus f4'"></i>
               </button>
         </div>
+        <mat-card *ngIf="createOn" class="w-90 mh3">
+            <form class="pa3" #NewScheduleForm="ngForm" (ngSubmit)="onSubmit(NewScheduleForm.value)">
+              <div class=" relative flex flex-row">
+                  <div class="w-20">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Schedule ID</mat-label>
+                          <input matInput name="id" required [(ngModel)]="newId">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="outline">
+                                      <mat-label>Choose a date</mat-label>
+                                      <input matInput [matDatepicker]="picker" required name="date" [(ngModel)] = "newDate">
+                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                  </div>
+                  <div class="w-20">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Zone</mat-label>
+                            <mat-select required name="zoneID" [(ngModel)] = "selectedZone">
+                              <mat-option *ngFor="let zone of allZones" [value]="zone.id">
+                                {{zone.name}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="outline">
+                          <mat-label>Temperature</mat-label>
+                          <input matInput name="temperature" required [(ngModel)]="newTemp">
+                        </mat-form-field>
+                  </div>
+                </div>
+                  <button mat-flat-button color="accent" type="submit" [disabled] = "NewScheduleForm.invalid" [ngClass]="{'grow ba white b--white bg-white fw7' : NewScheduleForm.valid}">
+                          SUBMIT
+                  </button>
+            </form>
+        </mat-card>
         <div *ngFor="let schedule of sortedSchedules">
             <mat-card class="w-20 fl ma3 bg-white-10 moon-gray">
                 <p><b class="mr2">Schedule ID</b>{{schedule.id}}</p>
